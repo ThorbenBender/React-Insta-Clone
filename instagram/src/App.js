@@ -8,10 +8,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      dummyData: dummyData,
-      comments: dummyData.comments,
+      dummyData: [],
     }
   }
+  // addNewComment = (event, idx) => {
+  //   console.log(event.target.value);
+  // }
   componentDidMount() {
     this.setState({
       dummyData: dummyData,
@@ -23,9 +25,9 @@ class App extends Component {
         <SearchBar />
         <div>
           {
-          this.state.dummyData.map((data, idx) => {
-            return <PostContainer data={data} key={idx} comments={this.state.comments}/>
-          })
+          this.state.dummyData.map((data, idx) => 
+            <PostContainer data={data} key={idx} id={idx}/>
+          )
         }
         </div>
       </div>
