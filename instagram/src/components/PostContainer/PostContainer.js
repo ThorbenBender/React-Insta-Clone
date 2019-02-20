@@ -8,12 +8,30 @@ export default class PostContainer extends Component {
         this.state = {
             comments: props.data.comments,
             inputValue: '',
+            like: 5,
+            liked: false,
         }
     }
     addNewComment = (event) => {
         event.preventDefault();
         let newArray = this.state.comments.concat({username: 'Thorben Bender', text: this.state.inputValue});
         this.setState({comments: newArray, inputValue: ''});
+    }
+    incrementLike = () => {
+        this.setState(state => {
+            return {like: state.like + 1};
+          });
+    }
+    decreaseLike = () => {
+        this.setState(state => {
+            return {like: state.like -1 };
+          });
+    }
+
+    isLiked = () => {
+        if (this.state.liked){
+            this.decreaseLike();
+        }
     }
 
     createNewComment = (event) => {
@@ -32,6 +50,9 @@ export default class PostContainer extends Component {
                     </div>
                 </div>
                 <div className="comment-section">
+                    <div className="comment-section-like">
+                        <button onClick={() => this.isLiked()}>{this.state.like}</button>
+                    </div>
                     <CommentSection comments={this.state.comments} />
                     <form onSubmit={this.addNewComment}>
                         <input type="text" value={this.state.inputValue} onChange={this.createNewComment} placeholder="Add a comment..."></input>
