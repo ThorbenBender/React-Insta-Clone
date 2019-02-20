@@ -1,19 +1,28 @@
 import React from 'react';
 import './PostContainer.css';
+import CommentSection from '../CommentSection/CommentSection';
 
-export default function PostContainer() {
+export default function PostContainer({data, comments}) {
     return (
-        <div className="PostContainer">
-            <div className="PostContainerTitle">
-                <div className="PostContainerTitleImage">
-                    <img src="https://cdn-images-1.medium.com/max/2000/1*vOrfclMVms7S4608zxC-ig.jpeg"></img>
-                </div>
-                <div className="PostContainerTitleName">
-                    <p>philzcoffee</p>
+        <div className="Post">
+            <div className="User">
+                <img src={data.thumbnailUrl} alt="user"></img>
+                <p>{data.username}</p>
+            </div>
+            <div>
+                <div className="postImage">
+                    <img src={data.imageUrl} alt="post"></img>
                 </div>
             </div>
-            <div className="PostContainerImg">
-                <img src="https://cdn-images-1.medium.com/max/2000/1*vOrfclMVms7S4608zxC-ig.jpeg"></img>
+            <div className="comment-section">
+                {
+                    comments.map((comment, idx) => {
+                        return <CommentSection comment={comment} key={idx}/>
+                    })
+                }
+                <form>
+                    <input type="text" placeholder="Add a comment..."></input>
+                </form>
             </div>
         </div>
     )

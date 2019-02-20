@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import PostContainer from './components/PostContainer/PostContainer';
-import CommentSection from './components/CommentSection/CommentSection';
 import dummyData from './dummy-data';
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faIgloo } from '@fortawesome/free-solid-svg-icons';
-
-// library.add(faIgloo)
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      dummyData: dummyData,
+      comments: dummyData.comments,
+    }
+  }
+  componentDidMount() {
+    this.setState({
+      dummyData: dummyData,
+    })
+  }
   render() {
     return (
-      <div>
-        <SearchBar/>
-      {
-        dummyData.map(data => 
+      <div className="app">
+        <SearchBar />
         <div>
-          {console.log(data)};
-          <PostContainer data={data}/>
-          <CommentSection data={data}/>
-        </div>)
-      }
+          {
+          this.state.dummyData.map((data, idx) => {
+            return <PostContainer data={data} key={idx} comments={this.state.comments}/>
+          })
+        }
+        </div>
       </div>
     );
   }

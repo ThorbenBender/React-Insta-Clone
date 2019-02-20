@@ -1,28 +1,11 @@
 import React from 'react';
+import './CommentSection.css';
 
-export default function CommentSection(props) {
+export default function CommentSection({comment}) {
     return (
-        <div className="CommentSection">    
-            <div className="CommentSectionIcons">
-                Icon 
-                Icon 
-            </div>
-            <div>
-                {props.likes}
-            </div>
-            <div>
-                {props.comments}
-            </div>
-            {
-                props.comments.map(comment => {
-                    return (
-                        <div>
-                            <p>{comment.username}</p>
-                            <p>{comment.text}</p>
-                        </div>
-                    )
-                })
-            }
+        <div className="comment">
+            <p className="comment-user">{comment.username}</p>
+            <p className="comment-text">{comment.text}</p>
         </div>
     )
 }
