@@ -1,6 +1,16 @@
 import React, {Component} from 'react';
-import './SearchBar.css';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { log } from 'util';
+import styled from 'styled-components';
+
+const StyledHeader = styled.header`
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    .SearchBarIcon{
+        font-size: 2rem;
+    }
+`
 
 export default class SearchBar extends Component{
     constructor(props) {
@@ -16,9 +26,12 @@ export default class SearchBar extends Component{
         event.preventDefault();
         this.props.filterPost(this.state.inputValue);
     }
+    logOut = () => {
+        localStorage.setItem('Auth', false);
+    }
     render() {
         return (
-            <div className="SearchBar">
+            <StyledHeader>
                 <div className="SearchBarIcon">
                     Logo
                 </div>
@@ -29,11 +42,11 @@ export default class SearchBar extends Component{
                     <input type="text" onChange={this.lookForUser} value={this.state.inputValue}></input>
                 </form>
                 <div className="SearchBarIcons">
-                    Icon 
-                    Icon 
-                    Icon 
+                    <button onClick={this.logOut}>Log Out</button>
+                    <button>About</button>
+                    <button>Contact</button>
                 </div>
-            </div>
+            </StyledHeader>
         );
     }
 }

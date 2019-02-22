@@ -1,6 +1,22 @@
 import React, {Component} from 'react';
-import './PostContainer.css';
 import CommentSection from '../CommentSection/CommentSection';
+import styled from 'styled-components';
+
+const StylePost = styled.div`
+    width: 100%;
+    .user{
+        width: 15%;
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+    }
+    .user img {
+        border-radius: 50%;
+        width: 20%;
+        height: 20%;
+
+    }
+`
 
 export default class PostContainer extends Component {
     constructor(props) {
@@ -19,18 +35,22 @@ export default class PostContainer extends Component {
     }
     incrementLike = () => {
         this.setState(state => {
-            return {like: state.like + 1};
+            return {like: state.like + 1,
+                    liked: !state.liked};
           });
     }
     decreaseLike = () => {
         this.setState(state => {
-            return {like: state.like -1 };
+            return {like: state.like -1,
+                    liked: !state.liked};
           });
     }
 
     isLiked = () => {
         if (this.state.liked){
             this.decreaseLike();
+        } else {
+            this.incrementLike();
         }
     }
 
@@ -39,8 +59,8 @@ export default class PostContainer extends Component {
     }
     render() {
         return (
-            <div className="Post">
-                <div className="User">
+            <StylePost>
+                <div className="user">
                     <img src={this.props.data.thumbnailUrl} alt="user"></img>
                     <p>{this.props.data.username}</p>
                 </div>
@@ -58,7 +78,7 @@ export default class PostContainer extends Component {
                         <input type="text" value={this.state.inputValue} onChange={this.createNewComment} placeholder="Add a comment..."></input>
                     </form>
                 </div>
-            </div>
+            </StylePost>
         )
     }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import './CommentSection.css';
 
 
 export default function CommentSection({comments}) {

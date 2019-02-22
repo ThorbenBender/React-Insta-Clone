@@ -1,7 +1,6 @@
 import React from 'react';
 import PostContainer from './PostContainer';
 
-
 export default function PostsPage(props) {
     return (
         <div>
